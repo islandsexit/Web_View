@@ -76,6 +76,14 @@ public class MainActivity extends Activity {
         vig.setWebChromeClient(new ChromeClient(){
 
         });
+        vig.addJavascriptInterface(new JavaInterface(), "test");
+    }
+
+    private class JavaInterface{
+        @android.webkit.JavascriptInterface
+        public boolean reload(){
+            return true;
+        }
     }
 
     private class MyWebViewClient extends WebViewClient {
