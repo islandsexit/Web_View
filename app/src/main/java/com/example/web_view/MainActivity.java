@@ -7,8 +7,10 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -298,17 +300,20 @@ public class MainActivity extends Activity {
     @Override
     public void onBackPressed() {
         if (vig.canGoBack()) {
-            vig.goBack();
+            vig.loadUrl("http://192.168.48.131/checkin");
         } else {
 //            super.onBackPressed();
         }
     }
 
     @Override
-    protected void onStop()
-    {
+    protected void onPause() {
+        super.onPause();
 
-        // insert here your instructions
+        ActivityManager activityManager = (ActivityManager) getApplicationContext()
+                .getSystemService(Context.ACTIVITY_SERVICE);
+
+        activityManager.moveTaskToFront(getTaskId(), 0);
     }
 
 }
