@@ -70,6 +70,7 @@ public class MainActivity extends Activity {
         vig.getSettings().setAllowContentAccess(true);
         vig.getSettings().supportZoom();
         vig.loadUrl("http://192.168.48.131/checkin");
+
         vig.setWebViewClient(new MyWebViewClient(){
 
         });
@@ -81,8 +82,8 @@ public class MainActivity extends Activity {
 
     private class JavaInterface{
         @android.webkit.JavascriptInterface
-        public boolean reload(){
-            return true;
+        public String reload(){
+            return "Hello";
         }
     }
 
@@ -292,6 +293,22 @@ public class MainActivity extends Activity {
         }
 
         return;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (vig.canGoBack()) {
+            vig.goBack();
+        } else {
+//            super.onBackPressed();
+        }
+    }
+
+    @Override
+    protected void onStop()
+    {
+
+        // insert here your instructions
     }
 
 }
